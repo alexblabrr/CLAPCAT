@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>$CLAPCAT - The Only Cat Applauding Your Diamond Hands 👏</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Outfit:wght@400;600;800;900&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Space Grotesk', 'sans-serif'],
+            display: ['Outfit', 'sans-serif'],
+            fun: ['Fredoka', 'sans-serif'],
+          },
+          colors: {
+            clap: {
+              yellow: '#FACC15',
+              green: '#22C55E',
+              neon: '#39FF14',
+              purple: '#A855F7',
+              dark: '#0A0A10',
+              card: '#13131F',
+              border: '#27273A'
+            }
+          },
+          animation: {
+            'bounce-quick': 'bounce 0.5s infinite',
+            'pulse-fast': 'pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'wiggle': 'wiggle 0.3s ease-in-out infinite alternate',
+            'float': 'float 3s ease-in-out infinite',
+            'glow': 'glow 2s ease-in-out infinite alternate',
+          },
+          keyframes: {
+            wiggle: {
+              '0%': { transform: 'rotate(-4deg) scale(1)' },
+              '100%': { transform: 'rotate(4deg) scale(1.04)' },
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-12px)' },
+            },
+            glow: {
+              '0%': { filter: 'drop-shadow(0 0 15px rgba(250, 204, 21, 0.4))' },
+              '100%': { filter: 'drop-shadow(0 0 35px rgba(57, 255, 20, 0.8))' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #08080d;
+      color: #f3f4f6;
+      overflow-x: hidden;
+    }
+    .neon-text-glow {
+      text-shadow: 0 0 20px rgba(250, 204, 21, 0.6), 0 0 40px rgba(34, 197, 94, 0.4);
+    }
+    .crypto-grid {
+      background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px), radial-gradient(rgba(250, 204, 21, 0.04) 1px, transparent 1px);
+      background-size: 32px 32px;
+      background-position: 0 0, 16px 16px;
+    }
+    .glass-card {
+      background: rgba(19, 19, 31, 0.75);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .glass-card:hover {
+      border-color: rgba(250, 204, 21, 0.35);
+    }
+    .marquee {
+      display: flex;
+      width: 200%;
+      animation: marquee 20s linear infinite;
+    }
+    @keyframes marquee {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-50%); }
+    }
+    .clapping-active {
+      animation: rapidClap 0.15s ease-in-out infinite alternate !important;
+    }
+    @keyframes rapidClap {
+      0% { transform: scale(0.96) rotate(-3deg); }
+      100% { transform: scale(1.05) rotate(3deg); }
+    }
+    /* Floating tap emojis */
+    .tap-emoji {
+      position: absolute;
+      pointer-events: none;
+      font-size: 2rem;
+      user-select: none;
+      animation: riseAndFade 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+      z-index: 60;
+    }
+    @keyframes riseAndFade {
+      0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(0.7) translateY(0) rotate(0deg);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(1.6) translateY(-140px) rotate(25deg);
+      }
+    }
+  </style>
+</head>
+<body class="crypto-grid selection:bg-clap-yellow selection:text-black">
+
+  <!-- TOP TICKER BAR -->
+  <div class="bg-gradient-to-r from-clap-yellow via-green-400 to-amber-400 text-black py-2 font-bold font-fun text-sm md:text-base overflow-hidden border-b-2 border-black sticky top-0 z-50 shadow-lg">
+    <div class="marquee whitespace-nowrap flex items-center gap-8">
+      <span>👏 $CLAPCAT: THE CLAPPING HAS STARTED</span>
+      <span>🚀 CURRENT APPLAUSE RATE: +420,690 RPM</span>
+      <span>🔥 100% LP BURNED & CONTRACT RENOUNCED</span>
+      <span>😼 HE PROUDLY CLAPS FOR YOUR SHITCOIN GAINS</span>
+      <span>💎 STANDING OVATION AT $1.00</span>
+      <span>👏 $CLAPCAT: THE CLAPPING HAS STARTED</span>
+      <span>🚀 CURRENT APPLAUSE RATE: +420,690 RPM</span>
+      <span>🔥 100% LP BURNED & CONTRACT RENOUNCED</span>
+      <span>😼 HE PROUDLY CLAPS FOR YOUR SHITCOIN GAINS</span>
+      <span>💎 STANDING OVATION AT $1.00</span>
+    </div>
+  </div>
+
+  <!-- NAVIGATION -->
+  <header class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex items-center justify-between relative z-40">
+    <div class="flex items-center gap-3">
+      <div class="relative w-12 h-12 rounded-full overflow-hidden border-2 border-clap-yellow shadow-[0_0_15px_rgba(250,204,21,0.5)]">
+        <img src="https://www.designarena.ai/u/ba779342-b7c7-49c1-bcbc-f59ddba923ab" alt="Clap Cat Logo" class="w-full h-full object-cover">
+      </div>
+      <div>
+        <span class="font-display font-black text-2xl tracking-wider text-white flex items-center gap-1.5">
+          CLAP<span class="text-clap-yellow">CAT</span> <span class="text-xs bg-clap-yellow/20 text-clap-yellow border border-clap-yellow/40 rounded px-1.5 py-0.5 font-sans font-bold">$CLAP</span>
+        </span>
+      </div>
+    </div>
+
+    <!-- Desktop Nav Links -->
+    <nav class="hidden md:flex items-center gap-8 font-medium text-sm text-gray-300">
+      <a href="#hero" class="hover:text-clap-yellow transition-colors">Home</a>
+      <a href="#clap-arena" class="hover:text-clap-yellow transition-colors flex items-center gap-1">Clap-O-Meter <span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-clap-neon opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-clap-neon"></span></span></a>
+      <a href="#about" class="hover:text-clap-yellow transition-colors">Lore</a>
+      <a href="#tokenomics" class="hover:text-clap-yellow transition-colors">Clapnomics</a>
+      <a href="#howtobuy" class="hover:text-clap-yellow transition-colors">How to Buy</a>
+      <a href="#roadmap" class="hover:text-clap-yellow transition-colors">Roadmap</a>
+    </nav>
+
+    <!-- Header Action CTAs -->
+    <div class="flex items-center gap-3">
+      <button id="soundToggleBtn" onclick="toggleMute()" class="p-2.5 rounded-xl bg-clap-card border border-clap-border hover:border-clap-yellow text-gray-300 hover:text-clap-yellow transition flex items-center gap-1.5 text-xs font-bold" title="Toggle Clap Sound FX">
+        <i data-lucide="volume-2" id="soundIcon" class="w-4 h-4 text-clap-yellow"></i>
+        <span class="hidden sm:inline" id="soundStatusText">SFX ON</span>
+      </button>
+
+      <a href="#howtobuy" class="bg-gradient-to-r from-clap-yellow to-amber-500 text-black font-display font-black px-5 py-2.5 rounded-xl hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(250,204,21,0.4)] transition-all flex items-center gap-2 text-sm">
+        <span>BUY NOW</span>
+        <i data-lucide="sparkles" class="w-4 h-4"></i>
+      </a>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <main>
+    <section id="hero" class="relative pt-6 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto overflow-hidden">
+      <!-- Glow Orbs -->
+      <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-clap-yellow/15 blur-[120px] rounded-full pointer-events-none"></div>
+      <div class="absolute bottom-10 right-10 w-80 h-80 bg-green-500/10 blur-[130px] rounded-full pointer-events-none"></div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <!-- Left Hero Content -->
+        <div class="lg:col-span-7 text-center lg:text-left space-y-6">
+          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs sm:text-sm font-semibold text-clap-yellow">
+            <span class="flex h-2 w-2 rounded-full bg-clap-neon animate-pulse"></span>
+            THE INTERNET'S MOST MOTIVATED FELINE IS ON SOLANA
+          </div>
+
+          <h1 class="text-4xl sm:text-6xl xl:text-7xl font-display font-black tracking-tight leading-[1.05] text-white">
+            HE CLAPS. <br class="hidden sm:inline"/>
+            YOU PUMP. <br/>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-clap-yellow via-amber-300 to-green-400 neon-text-glow">WE MOON.</span> 👏😼
+          </h1>
+
+          <p class="text-base sm:text-xl text-gray-400 max-w-2xl font-sans leading-relaxed">
+            Tired of red candles? Don't worry, the grinning black cat is standing on two legs giving you an unconditional, polite standing ovation for every single trade you make.
+          </p>
+
+          <!-- Contract Address Bar -->
+          <div class="p-3 bg-clap-card rounded-2xl border border-clap-border max-w-xl shadow-xl flex flex-col sm:flex-row items-center gap-3">
+            <div class="flex items-center gap-2 px-3 py-1.5 bg-black/60 rounded-xl text-xs font-mono text-gray-400 w-full sm:w-auto flex-1 overflow-hidden">
+              <span class="text-clap-yellow font-bold uppercase shrink-0">CA:</span>
+              <span id="caText" class="truncate">CLAP7sQv9N8zE4MoonCatPawsB779342SolPump69</span>
+            </div>
+            <button onclick="copyCA()" class="w-full sm:w-auto px-4 py-2 bg-white/10 hover:bg-white/20 active:bg-clap-yellow active:text-black rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 shrink-0 text-white" id="copyBtn">
+              <i data-lucide="copy" class="w-4 h-4"></i>
+              <span id="copyBtnText">Copy CA</span>
+            </button>
+          </div>
+
+          <!-- CTAs -->
+          <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
+            <a href="https://raydium.io" target="_blank" class="px-7 py-3.5 bg-gradient-to-r from-clap-yellow to-amber-400 text-black font-display font-black rounded-xl text-base shadow-[0_4px_25px_rgba(250,204,21,0.4)] hover:brightness-110 hover:-translate-y-0.5 active:translate-y-0 transition flex items-center gap-2">
+              <i data-lucide="wallet" class="w-5 h-5"></i>
+              Swap on Raydium
+            </a>
+            <a href="https://dexscreener.com" target="_blank" class="px-6 py-3.5 bg-clap-card border border-clap-border hover:border-clap-yellow rounded-xl text-white font-bold text-base hover:-translate-y-0.5 transition flex items-center gap-2">
+              <i data-lucide="trending-up" class="w-5 h-5 text-clap-neon"></i>
+              Live DexChart
+            </a>
+            <a href="https://t.me" target="_blank" class="p-3.5 bg-clap-card border border-clap-border hover:border-clap-yellow rounded-xl text-gray-300 hover:text-white transition" title="Telegram Community">
+              <i data-lucide="send" class="w-5 h-5"></i>
+            </a>
+            <a href="https://x.com" target="_blank" class="p-3.5 bg-clap-card border border-clap-border hover:border-clap-yellow rounded-xl text-gray-300 hover:text-white transition" title="X / Twitter">
+              <i data-lucide="twitter" class="w-5 h-5"></i>
+            </a>
+          </div>
+
+          <!-- Real-time metrics grid -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4 max-w-xl">
+            <div class="glass-card p-3 rounded-xl">
+              <div class="text-xs text-gray-400 font-medium">PRICE (USD)</div>
+              <div class="text-lg font-bold font-mono text-clap-neon" id="livePrice">$0.004269</div>
+              <div class="text-[10px] text-green-400 flex items-center gap-0.5 font-bold">+69.42% 24h</div>
+            </div>
+            <div class="glass-card p-3 rounded-xl">
+              <div class="text-xs text-gray-400 font-medium">MARKET CAP</div>
+              <div class="text-lg font-bold font-mono text-white">$4.26M</div>
+              <div class="text-[10px] text-clap-yellow font-bold">Goal: $1B</div>
+            </div>
+            <div class="glass-card p-3 rounded-xl">
+              <div class="text-xs text-gray-400 font-medium">HOLDERS</div>
+              <div class="text-lg font-bold font-mono text-white" id="holderCount">8,942</div>
+              <div class="text-[10px] text-purple-400 font-bold">Clap Army 🐾</div>
+            </div>
+            <div class="glass-card p-3 rounded-xl">
+              <div class="text-xs text-gray-400 font-medium">COMMUNITY CLAPS</div>
+              <div class="text-lg font-bold font-mono text-clap-yellow" id="heroTotalClaps">1,337,420</div>
+              <div class="text-[10px] text-white/70 font-bold">Always Cheering</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Hero Interactive Mascot Card -->
+        <div class="lg:col-span-5 flex flex-col items-center">
+          <div class="relative w-full max-w-sm sm:max-w-md mx-auto">
+            <!-- Glow background -->
+            <div class="absolute -inset-4 bg-gradient-to-r from-clap-yellow/30 via-clap-neon/30 to-purple-600/30 rounded-3xl blur-2xl opacity-70 group-hover:opacity-100 transition duration-1000 animate-pulse"></div>
+
+            <div class="relative bg-clap-card border-2 border-clap-yellow/50 rounded-3xl p-5 shadow-2xl text-center overflow-hidden">
+              <!-- Top Card Badge -->
+              <div class="flex items-center justify-between pb-3 border-b border-clap-border mb-3">
+                <span class="text-xs font-mono font-bold text-clap-yellow flex items-center gap-1.5">
+                  <span class="w-2 h-2 rounded-full bg-clap-yellow animate-ping"></span>
+                  AUTHENTIC CLAPPER
+                </span>
+                <span class="text-xs bg-white/10 px-2.5 py-0.5 rounded-full text-gray-300 font-bold">
+                  TAP HIM! 👇
+                </span>
+              </div>
+
+              <!-- Main Meme Image Interactive Clicker Container -->
+              <div id="catClickTarget" onclick="triggerClap(event)" class="relative cursor-pointer select-none rounded-2xl overflow-hidden bg-black/60 border border-white/10 aspect-[4/5] flex items-center justify-center group active:scale-95 transition-transform duration-75">
+                <img 
+                  id="catMemeImage"
+                  src="https://www.designarena.ai/u/ba779342-b7c7-49c1-bcbc-f59ddba923ab" 
+                  alt="Clapping Black Cat Meme" 
+                  class="w-full h-full object-cover transition-transform duration-200 group-hover:scale-105"
+                />
+
+                <!-- Overlay prompt -->
+                <div class="absolute bottom-3 inset-x-3 bg-black/80 backdrop-blur-md py-2 px-3 rounded-xl border border-clap-yellow/40 flex items-center justify-center gap-2 pointer-events-none">
+                  <span class="text-2xl animate-bounce">👏</span>
+                  <span class="text-xs font-display font-extrabold uppercase tracking-wide text-clap-yellow">Click cat to clap & pump!</span>
+                </div>
+              </div>
+
+              <!-- Mini Stats under the image -->
+              <div class="mt-4 flex items-center justify-between px-2 pt-2">
+                <div class="text-left">
+                  <div class="text-xs text-gray-400">Your Session Claps</div>
+                  <div class="text-2xl font-mono font-black text-clap-yellow" id="sessionClaps">0</div>
+                </div>
+                <button onclick="triggerFrenzyClap()" class="px-4 py-2 bg-gradient-to-r from-red-500 to-amber-500 rounded-xl font-display font-black text-xs text-white shadow-lg hover:scale-105 active:scale-95 transition flex items-center gap-1.5">
+                  <i data-lucide="flame" class="w-4 h-4"></i>
+                  RAPID APPLAUSE
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: INTERACTIVE CLAP-O-METER GAME -->
+    <section id="clap-arena" class="py-16 bg-gradient-to-b from-transparent via-[#0d0d16] to-transparent border-y border-white/5 relative">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 text-center">
+        <span class="px-3 py-1 bg-clap-yellow/10 border border-clap-yellow/30 text-clap-yellow font-bold text-xs uppercase rounded-full">
+          Decentralized Proof of Applause
+        </span>
+        <h2 class="text-3xl sm:text-5xl font-display font-black text-white mt-3">
+          THE GLOBAL CLAP-O-METER 👏
+        </h2>
+        <p class="text-gray-400 mt-2 max-w-xl mx-auto text-sm sm:text-base">
+          Every clap sends cosmic acoustic vibrations directly to the Solana blockchain. Tap the buttons or hammer spacebar to keep the vibes at 100%.
+        </p>
+
+        <!-- Progress to next applause milestone -->
+        <div class="mt-8 glass-card p-6 rounded-3xl max-w-3xl mx-auto border border-white/10">
+          <div class="flex items-center justify-between text-xs sm:text-sm font-bold mb-2">
+            <span class="text-gray-400 flex items-center gap-1">
+              <i data-lucide="zap" class="w-4 h-4 text-clap-yellow"></i>
+              Applause Hype Meter
+            </span>
+            <span class="text-clap-neon font-mono" id="hypePercent">84% FULL (FRENZY MODE NEAR)</span>
+          </div>
+
+          <!-- Bar -->
+          <div class="w-full bg-black/60 h-5 rounded-full overflow-hidden p-1 border border-white/10">
+            <div id="hypeBar" class="h-full bg-gradient-to-r from-clap-yellow via-green-400 to-clap-neon rounded-full transition-all duration-300 w-[84%] shadow-[0_0_15px_rgba(57,255,20,0.6)]"></div>
+          </div>
+
+          <!-- Soundboard buttons -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-6">
+            <button onclick="playSFX('polite')" class="p-3 bg-white/5 hover:bg-white/10 rounded-xl border border-white/10 hover:border-clap-yellow font-medium text-xs text-white transition flex flex-col items-center gap-1">
+              <span class="text-xl">🐱</span>
+              <span class="font-bold">Polite Clap</span>
+              <span class="text-[10px] text-gray-400 font-mono">+1 Clap</span>
+            </button>
+            <button onclick="playSFX('ovation')" class="p-3 bg-white/5 hover:bg-white/10 rounded-xl border border-white/10 hover:border-clap-yellow font-medium text-xs text-white transition flex flex-col items-center gap-1">
+              <span class="text-xl">👏</span>
+              <span class="font-bold">Standing Ovation</span>
+              <span class="text-[10px] text-clap-yellow font-mono">+10 Claps</span>
+            </button>
+            <button onclick="playSFX('moon')" class="p-3 bg-white/5 hover:bg-white/10 rounded-xl border border-white/10 hover:border-clap-yellow font-medium text-xs text-white transition flex flex-col items-center gap-1">
+              <span class="text-xl">🚀</span>
+              <span class="font-bold">Moon Cheer</span>
+              <span class="text-[10px] text-green-400 font-mono">+50 Claps</span>
+            </button>
+            <button onclick="playSFX('airhorn')" class="p-3 bg-white/5 hover:bg-white/10 rounded-xl border border-white/10 hover:border-clap-yellow font-medium text-xs text-white transition flex flex-col items-center gap-1">
+              <span class="text-xl">📢</span>
+              <span class="font-bold">Degen Airhorn</span>
+              <span class="text-[10px] text-purple-400 font-mono">+100 Claps</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: LORE & ABOUT -->
+    <section id="about" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <!-- Image Card -->
+        <div class="lg:col-span-5 order-2 lg:order-1">
+          <div class="relative glass-card p-4 rounded-3xl border border-white/10 shadow-2xl">
+            <div class="rounded-2xl overflow-hidden relative">
+              <img src="https://www.designarena.ai/u/ba779342-b7c7-49c1-bcbc-f59ddba923ab" alt="Cat Smiling Meme" class="w-full h-auto object-cover rounded-xl filter contrast-110">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-6">
+                <div>
+                  <div class="text-clap-yellow font-bold text-xs uppercase tracking-wider">Historical Artifact #001</div>
+                  <div class="text-white font-display font-black text-xl">The Two-Legged Polite Enigma</div>
+                  <p class="text-xs text-gray-300 mt-1">Found standing upright in the kitchen, aggressively applauding for no known scientific reason.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Text Content -->
+        <div class="lg:col-span-7 order-1 lg:order-2 space-y-6">
+          <span class="text-xs font-bold uppercase tracking-wider text-clap-yellow px-3 py-1 bg-clap-yellow/10 rounded-full border border-clap-yellow/25">Origin Story</span>
+          <h2 class="text-3xl sm:text-5xl font-display font-black text-white leading-tight">
+            WHO IS THE CLAPPING CAT?
+          </h2>
+          <p class="text-gray-300 font-sans text-base sm:text-lg leading-relaxed">
+            In a dark crypto winter filled with rugpulls, red candles, and despair, an upright black feline with pristine human dental hygiene emerged from TikTok and Discord lore. 
+          </p>
+          <p class="text-gray-400 font-sans text-base leading-relaxed">
+            While dog coins bite and frog coins croak, <strong class="text-white">$CLAPCAT</strong> does one thing and one thing only: <strong class="text-clap-yellow">it stands on its two hind paws and enthusiastically claps for your portfolio</strong>, whether you made 10,000% on a random meme coin or bought the absolute top.
+          </p>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4">
+            <div class="p-4 bg-white/5 rounded-2xl border border-white/5">
+              <div class="text-2xl mb-1">😬</div>
+              <div class="font-bold text-white text-sm">Perfect Smile</div>
+              <div class="text-xs text-gray-400 mt-1">Equipped with 32 flawless human teeth to smile through the volatility.</div>
+            </div>
+            <div class="p-4 bg-white/5 rounded-2xl border border-white/5">
+              <div class="text-2xl mb-1">🐾</div>
+              <div class="font-bold text-white text-sm">Bipedal Stance</div>
+              <div class="text-xs text-gray-400 mt-1">Evolution chose this posture exclusively to free up hands for maximum clapping.</div>
+            </div>
+            <div class="p-4 bg-white/5 rounded-2xl border border-white/5">
+              <div class="text-2xl mb-1">🤝</div>
+              <div class="font-bold text-white text-sm">Zero Judgment</div>
+              <div class="text-xs text-gray-400 mt-1">Whether you take profits or roundtrip to zero, he will still applaud politely.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: TOKENOMICS ("CLAPNOMICS") -->
+    <section id="tokenomics" class="py-20 bg-[#0c0c14] relative border-y border-white/5">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <span class="text-xs font-bold uppercase tracking-wider text-clap-neon px-3 py-1 bg-clap-neon/10 rounded-full border border-clap-neon/25">100% Fair & Transparent</span>
+          <h2 class="text-3xl sm:text-5xl font-display font-black text-white mt-3">CLAPNOMICS 📊</h2>
+          <p class="text-gray-400 text-sm sm:text-base mt-2">Zero taxes. No presale cabals. Pure organic clapping energy straight into liquidity.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- Card 1 -->
+          <div class="glass-card p-6 rounded-3xl relative overflow-hidden group hover:border-clap-yellow/50 transition duration-300">
+            <div class="w-12 h-12 rounded-2xl bg-clap-yellow/10 border border-clap-yellow/30 flex items-center justify-center text-clap-yellow mb-4 group-hover:scale-110 transition">
+              <i data-lucide="coins" class="w-6 h-6"></i>
+            </div>
+            <div class="text-sm text-gray-400 font-medium">TOTAL TOKEN SUPPLY</div>
+            <div class="text-2xl sm:text-3xl font-display font-black text-white mt-1">1,000,000,000</div>
+            <div class="text-xs text-gray-400 mt-2">1 Billion $CLAP tokens. Exactly enough for each person on Earth to receive their deserved applause.</div>
+            <div class="mt-4 pt-3 border-t border-white/5 text-[11px] font-mono text-clap-yellow">100% IN CIRCULATION</div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="glass-card p-6 rounded-3xl relative overflow-hidden group hover:border-green-400/50 transition duration-300">
+            <div class="w-12 h-12 rounded-2xl bg-green-500/10 border border-green-500/30 flex items-center justify-center text-green-400 mb-4 group-hover:scale-110 transition">
+              <i data-lucide="percent" class="w-6 h-6"></i>
+            </div>
+            <div class="text-sm text-gray-400 font-medium">TAX SYSTEM</div>
+            <div class="text-2xl sm:text-3xl font-display font-black text-green-400 mt-1">0% BUY / 0% SELL</div>
+            <div class="text-xs text-gray-400 mt-2">No sneaky fees, no owner cuts. You trade freely without leaving a single satoshi behind.</div>
+            <div class="mt-4 pt-3 border-t border-white/5 text-[11px] font-mono text-green-400">PURE SPOT TRADING</div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="glass-card p-6 rounded-3xl relative overflow-hidden group hover:border-purple-400/50 transition duration-300">
+            <div class="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 mb-4 group-hover:scale-110 transition">
+              <i data-lucide="flame" class="w-6 h-6"></i>
+            </div>
+            <div class="text-sm text-gray-400 font-medium">LIQUIDITY & OWNERSHIP</div>
+            <div class="text-2xl sm:text-3xl font-display font-black text-purple-400 mt-1">LP BURNED & RENOUNCED</div>
+            <div class="text-xs text-gray-400 mt-2">Initial liquidity pool burned forever to Solana incinirator address. Mint authority revoked.</div>
+            <div class="mt-4 pt-3 border-t border-white/5 text-[11px] font-mono text-purple-400">100% UNRUGGABLE</div>
+          </div>
+        </div>
+
+        <!-- Token Distribution Visual Bar -->
+        <div class="mt-8 glass-card p-6 rounded-3xl">
+          <div class="text-sm font-bold text-white mb-3 flex items-center justify-between">
+            <span>Token Allocation Breakdown</span>
+            <span class="text-xs text-clap-yellow font-mono">100% COMMUNITY DRIVEN</span>
+          </div>
+          <div class="w-full h-8 bg-black/60 rounded-xl overflow-hidden flex p-1 border border-white/10 gap-1">
+            <div class="h-full bg-clap-yellow rounded-lg flex items-center justify-center text-[10px] font-bold text-black font-mono w-[85%]" title="85% Fairlaunch Liquidity Pool">
+              85% RAYDIUM LP (LOCKED FOREVER)
+            </div>
+            <div class="h-full bg-green-400 rounded-lg flex items-center justify-center text-[10px] font-bold text-black font-mono w-[10%]" title="10% CEX Listings Reserve">
+              10% CEX
+            </div>
+            <div class="h-full bg-purple-400 rounded-lg flex items-center justify-center text-[10px] font-bold text-black font-mono w-[5%]" title="5% Clapper Marketing Airdrop">
+              5%
+            </div>
+          </div>
+          <div class="flex flex-wrap items-center justify-between text-xs text-gray-400 mt-3 font-mono">
+            <span class="flex items-center gap-1.5"><span class="w-3 h-3 bg-clap-yellow rounded"></span> 85% Raydium Liquidity Pool (Burned)</span>
+            <span class="flex items-center gap-1.5"><span class="w-3 h-3 bg-green-400 rounded"></span> 10% Tier-1 CEX Listings Reserve</span>
+            <span class="flex items-center gap-1.5"><span class="w-3 h-3 bg-purple-400 rounded"></span> 5% Viral Memes & Cat Food Marketing</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: HOW TO BUY -->
+    <section id="howtobuy" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-xs font-bold uppercase tracking-wider text-clap-yellow px-3 py-1 bg-clap-yellow/10 rounded-full border border-clap-yellow/25">Simple 4-Step Process</span>
+        <h2 class="text-3xl sm:text-5xl font-display font-black text-white mt-3">HOW TO BUY $CLAPCAT 🛒</h2>
+        <p class="text-gray-400 text-sm sm:text-base mt-2">Get yourself some clapping cats before the entire globe stands up in applause.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Step 1 -->
+        <div class="glass-card p-6 rounded-3xl relative border border-white/5 hover:border-clap-yellow/40 transition">
+          <div class="text-4xl font-display font-black text-white/20 absolute top-5 right-5">01</div>
+          <div class="w-10 h-10 rounded-xl bg-clap-yellow/10 text-clap-yellow flex items-center justify-center font-bold mb-4">
+            <i data-lucide="shield-check" class="w-5 h-5"></i>
+          </div>
+          <h3 class="text-lg font-bold text-white mb-2">Create Phantom Wallet</h3>
+          <p class="text-xs text-gray-400 leading-relaxed">
+            Download Phantom or your favorite Solana wallet from the app store or as a browser extension. Keep your secret recovery phrase secure!
+          </p>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="glass-card p-6 rounded-3xl relative border border-white/5 hover:border-clap-yellow/40 transition">
+          <div class="text-4xl font-display font-black text-white/20 absolute top-5 right-5">02</div>
+          <div class="w-10 h-10 rounded-xl bg-green-500/10 text-green-400 flex items-center justify-center font-bold mb-4">
+            <i data-lucide="arrow-down-left" class="w-5 h-5"></i>
+          </div>
+          <h3 class="text-lg font-bold text-white mb-2">Acquire Some SOL</h3>
+          <p class="text-xs text-gray-400 leading-relaxed">
+            Purchase SOL on Binance, Coinbase, Bybit, or Kraken, and transfer it over to your Phantom wallet address.
+          </p>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="glass-card p-6 rounded-3xl relative border border-white/5 hover:border-clap-yellow/40 transition">
+          <div class="text-4xl font-display font-black text-white/20 absolute top-5 right-5">03</div>
+          <div class="w-10 h-10 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center font-bold mb-4">
+            <i data-lucide="repeat" class="w-5 h-5"></i>
+          </div>
+          <h3 class="text-lg font-bold text-white mb-2">Connect to Raydium</h3>
+          <p class="text-xs text-gray-400 leading-relaxed">
+            Head over to Raydium.io or Jupiter Swap. Connect your Phantom wallet and paste the official $CLAPCAT token contract address.
+          </p>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="glass-card p-6 rounded-3xl relative border border-white/5 hover:border-clap-yellow/40 transition">
+          <div class="text-4xl font-display font-black text-white/20 absolute top-5 right-5">04</div>
+          <div class="w-10 h-10 rounded-xl bg-clap-neon/10 text-clap-neon flex items-center justify-center font-bold mb-4">
+            <i data-lucide="party-popper" class="w-5 h-5"></i>
+          </div>
+          <h3 class="text-lg font-bold text-white mb-2">Swap & Receive Applause</h3>
+          <p class="text-xs text-gray-400 leading-relaxed">
+            Swap SOL for $CLAPCAT. Set slippage to auto (0.5% - 1%). Confirm the transaction and watch the cat stand up and applaud your bag!
+          </p>
+        </div>
+      </div>
+
+      <!-- Quick Swap Calculator / Simulation Widget -->
+      <div class="mt-12 max-w-xl mx-auto glass-card p-6 rounded-3xl border border-clap-yellow/30 shadow-2xl">
+        <div class="flex items-center justify-between pb-3 border-b border-white/10 mb-4">
+          <span class="text-xs font-bold text-clap-yellow uppercase tracking-wide flex items-center gap-1.5">
+            <i data-lucide="zap" class="w-4 h-4"></i> Instant Swap Simulator
+          </span>
+          <span class="text-[10px] text-gray-400 font-mono">1 SOL ≈ 42,000 $CLAP</span>
+        </div>
+
+        <div class="space-y-3">
+          <div>
+            <label class="text-xs text-gray-400 block mb-1">You Pay (SOL)</label>
+            <div class="flex items-center bg-black/70 border border-white/10 rounded-xl px-4 py-2.5">
+              <input type="number" id="solInput" value="1.5" min="0.1" step="0.1" oninput="updateSwapCalc()" class="bg-transparent text-white font-mono text-lg w-full focus:outline-none">
+              <span class="text-xs font-bold font-mono text-purple-400 ml-2">SOL</span>
+            </div>
+          </div>
+
+          <div class="flex justify-center -my-1 relative z-10">
+            <div class="bg-clap-border p-1.5 rounded-full border border-white/20 text-clap-yellow">
+              <i data-lucide="arrow-down" class="w-4 h-4"></i>
+            </div>
+          </div>
+
+          <div>
+            <label class="text-xs text-gray-400 block mb-1">You Receive ($CLAPCAT)</label>
+            <div class="flex items-center bg-black/70 border border-white/10 rounded-xl px-4 py-2.5">
+              <input type="text" id="clapOutput" value="63,000" readonly class="bg-transparent text-clap-neon font-mono text-lg font-bold w-full focus:outline-none">
+              <span class="text-xs font-bold font-mono text-clap-yellow ml-2">$CLAP</span>
+            </div>
+          </div>
+
+          <button onclick="handleSimulatedSwap()" class="w-full mt-4 py-3.5 bg-gradient-to-r from-clap-yellow via-amber-400 to-green-400 text-black font-display font-black rounded-xl text-base shadow-[0_0_20px_rgba(250,204,21,0.4)] hover:brightness-110 active:scale-95 transition flex items-center justify-center gap-2">
+            <span>GET $CLAPCAT ON RAYDIUM</span>
+            <i data-lucide="external-link" class="w-4 h-4"></i>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: ROADMAP -->
+    <section id="roadmap" class="py-20 bg-[#0a0a12] border-t border-white/5 relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <span class="text-xs font-bold uppercase tracking-wider text-clap-yellow px-3 py-1 bg-clap-yellow/10 rounded-full border border-clap-yellow/25">The Master Plan</span>
+          <h2 class="text-3xl sm:text-5xl font-display font-black text-white mt-3">ROADMAP TO STANDING OVATION 🗺️</h2>
+          <p class="text-gray-400 text-sm sm:text-base mt-2">No vague tech jargon. Just pure unadulterated viral cat momentum.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 relative">
+          <!-- Phase 1 -->
+          <div class="glass-card p-6 rounded-3xl border-t-4 border-t-green-400">
+            <span class="text-xs font-bold text-green-400 font-mono">PHASE 01 • COMPLETED</span>
+            <h3 class="text-xl font-bold text-white mt-2">The Gentle Clap</h3>
+            <ul class="text-xs text-gray-400 space-y-2 mt-4">
+              <li class="flex items-center gap-2 text-gray-200">✅ Fair stealth launch on Solana</li>
+              <li class="flex items-center gap-2 text-gray-200">✅ 100% LP burned & contract renounced</li>
+              <li class="flex items-center gap-2 text-gray-200">✅ First 1,000 cat cult members</li>
+              <li class="flex items-center gap-2 text-gray-200">✅ DexScreener & DexTools trending</li>
+            </ul>
+          </div>
+
+          <!-- Phase 2 -->
+          <div class="glass-card p-6 rounded-3xl border-t-4 border-t-clap-yellow relative overflow-hidden">
+            <span class="text-xs font-bold text-clap-yellow font-mono flex items-center gap-1">
+              PHASE 02 • IN PROGRESS <span class="w-2 h-2 rounded-full bg-clap-yellow animate-ping"></span>
+            </span>
+            <h3 class="text-xl font-bold text-white mt-2">Audible Applause</h3>
+            <ul class="text-xs text-gray-400 space-y-2 mt-4">
+              <li class="flex items-center gap-2 text-white">🔄 CoinGecko & CoinMarketCap fast-track</li>
+              <li class="flex items-center gap-2 text-white">🔄 Viral TikTok & Reels clap filter</li>
+              <li class="flex items-center gap-2 text-white">🔄 10,000+ Holders milestone</li>
+              <li class="flex items-center gap-2 text-gray-400">⏳ Community meme contests with SOL rewards</li>
+            </ul>
+          </div>
+
+          <!-- Phase 3 -->
+          <div class="glass-card p-6 rounded-3xl border-t-4 border-t-purple-400">
+            <span class="text-xs font-bold text-purple-400 font-mono">PHASE 03 • UPCOMING</span>
+            <h3 class="text-xl font-bold text-white mt-2">Standing Ovation</h3>
+            <ul class="text-xs text-gray-400 space-y-2 mt-4">
+              <li class="flex items-center gap-2 text-gray-400">⏳ Tier 2 & Tier 1 CEX Listings</li>
+              <li class="flex items-center gap-2 text-gray-400">⏳ Web3 Telegram Tap-to-Clap Miniapp</li>
+              <li class="flex items-center gap-2 text-gray-400">⏳ Real-life billboard in Times Square</li>
+              <li class="flex items-center gap-2 text-gray-400">⏳ 50,000+ Clappers</li>
+            </ul>
+          </div>
+
+          <!-- Phase 4 -->
+          <div class="glass-card p-6 rounded-3xl border-t-4 border-t-clap-neon">
+            <span class="text-xs font-bold text-clap-neon font-mono">PHASE 04 • ASCENSION</span>
+            <h3 class="text-xl font-bold text-white mt-2">Global Thunder</h3>
+            <ul class="text-xs text-gray-400 space-y-2 mt-4">
+              <li class="flex items-center gap-2 text-gray-400">⏳ Flip old tired meme dogs</li>
+              <li class="flex items-center gap-2 text-gray-400">⏳ $1.00 Clapper Dream</li>
+              <li class="flex items-center gap-2 text-gray-400">⏳ World record for most simultaneous claps</li>
+              <li class="flex items-center gap-2 text-gray-400">⏳ Cat statue erected in metaverse</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: MEME GALLERY / COMMUNITY VIBES -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <span class="text-xs font-bold uppercase tracking-wider text-clap-yellow px-3 py-1 bg-clap-yellow/10 rounded-full border border-clap-yellow/25">HALL OF APPLAUSE</span>
+        <h2 class="text-3xl sm:text-5xl font-display font-black text-white mt-3">CERTIFIED DANK MEMES 🖼️</h2>
+        <p class="text-gray-400 text-sm sm:text-base mt-2">The face you make when the chart goes parabolic.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Meme Card 1 -->
+        <div class="glass-card p-4 rounded-3xl border border-white/5 hover:border-clap-yellow/30 transition">
+          <div class="rounded-2xl overflow-hidden aspect-square bg-black/40 relative">
+            <img src="https://www.designarena.ai/u/ba779342-b7c7-49c1-bcbc-f59ddba923ab" alt="Meme 1" class="w-full h-full object-cover">
+            <div class="absolute top-3 left-3 bg-black/80 px-3 py-1 rounded-lg text-xs font-bold text-clap-yellow border border-clap-yellow/30">
+              ME BUYING THE DIP
+            </div>
+          </div>
+          <div class="p-3 text-sm text-gray-300 font-medium">
+            "When you bought at ATH but he still believes in you"
+          </div>
+        </div>
+
+        <!-- Meme Card 2 -->
+        <div class="glass-card p-4 rounded-3xl border border-white/5 hover:border-clap-yellow/30 transition">
+          <div class="rounded-2xl overflow-hidden aspect-square bg-black/40 relative">
+            <img src="https://www.designarena.ai/u/ba779342-b7c7-49c1-bcbc-f59ddba923ab" alt="Meme 2" class="w-full h-full object-cover filter hue-rotate-90">
+            <div class="absolute top-3 left-3 bg-black/80 px-3 py-1 rounded-lg text-xs font-bold text-green-400 border border-green-400/30">
+              GREEN CANDLE CAT
+            </div>
+          </div>
+          <div class="p-3 text-sm text-gray-300 font-medium">
+            "The dopamine hit when you see that +500% candle"
+          </div>
+        </div>
+
+        <!-- Meme Card 3 -->
+        <div class="glass-card p-4 rounded-3xl border border-white/5 hover:border-clap-yellow/30 transition">
+          <div class="rounded-2xl overflow-hidden aspect-square bg-black/40 relative">
+            <img src="https://www.designarena.ai/u/ba779342-b7c7-49c1-bcbc-f59ddba923ab" alt="Meme 3" class="w-full h-full object-cover filter invert contrast-125">
+            <div class="absolute top-3 left-3 bg-black/80 px-3 py-1 rounded-lg text-xs font-bold text-purple-400 border border-purple-400/30">
+              SECRET SHADOW CAT
+            </div>
+          </div>
+          <div class="p-3 text-sm text-gray-300 font-medium">
+            "Late night chart watching while everyone else is asleep"
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: FAQ -->
+    <section class="py-16 bg-[#0c0c16] border-t border-white/5">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6">
+        <h2 class="text-3xl font-display font-black text-white text-center mb-8">FREQUENTLY CLAPPED QUESTIONS ❓</h2>
+        
+        <div class="space-y-4">
+          <!-- Accordion 1 -->
+          <div class="glass-card rounded-2xl border border-white/5 overflow-hidden">
+            <button onclick="toggleFaq(1)" class="w-full p-5 text-left font-bold text-white flex justify-between items-center hover:text-clap-yellow transition">
+              <span>Why is the cat smiling with human teeth?</span>
+              <i data-lucide="chevron-down" id="faq-icon-1" class="w-5 h-5 transition-transform duration-200"></i>
+            </button>
+            <div id="faq-content-1" class="hidden px-5 pb-5 text-sm text-gray-400">
+              Because he brushed twice a day and knows that your financial comeback will be legendary. That smile is 100% pure optimism filter energy.
+            </div>
+          </div>
+
+          <!-- Accordion 2 -->
+          <div class="glass-card rounded-2xl border border-white/5 overflow-hidden">
+            <button onclick="toggleFaq(2)" class="w-full p-5 text-left font-bold text-white flex justify-between items-center hover:text-clap-yellow transition">
+              <span>Is liquidity locked and contract safe?</span>
+              <i data-lucide="chevron-down" id="faq-icon-2" class="w-5 h-5 transition-transform duration-200"></i>
+            </button>
+            <div id="faq-content-2" class="hidden px-5 pb-5 text-sm text-gray-400">
+              Yes! 100% of the initial Raydium Liquidity Pool tokens were sent to the permanent burn address on Solana. The contract mint is revoked and immutable.
+            </div>
+          </div>
+
+          <!-- Accordion 3 -->
+          <div class="glass-card rounded-2xl border border-white/5 overflow-hidden">
+            <button onclick="toggleFaq(3)" class="w-full p-5 text-left font-bold text-white flex justify-between items-center hover:text-clap-yellow transition">
+              <span>What is the ultimate utility of $CLAPCAT?</span>
+              <i data-lucide="chevron-down" id="faq-icon-3" class="w-5 h-5 transition-transform duration-200"></i>
+            </button>
+            <div id="faq-content-3" class="hidden px-5 pb-5 text-sm text-gray-400">
+              The highest tier of digital utility known to man: pure happiness, peer-to-peer standing ovations, dopamine surges, and viral meme culture on Solana.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-white/10 bg-black pt-12 pb-16 text-gray-400 text-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="flex items-center gap-3">
+        <img src="https://www.designarena.ai/u/ba779342-b7c7-49c1-bcbc-f59ddba923ab" alt="Cat Logo" class="w-8 h-8 rounded-full border border-clap-yellow">
+        <span class="font-display font-black text-white text-base">$CLAPCAT ON SOLANA</span>
+      </div>
+
+      <div class="flex items-center gap-6 font-medium">
+        <a href="#hero" class="hover:text-clap-yellow transition">Top</a>
+        <a href="https://raydium.io" target="_blank" class="hover:text-clap-yellow transition">Raydium</a>
+        <a href="https://dexscreener.com" target="_blank" class="hover:text-clap-yellow transition">DexScreener</a>
+        <a href="https://t.me" target="_blank" class="hover:text-clap-yellow transition">Telegram</a>
+        <a href="https://x.com" target="_blank" class="hover:text-clap-yellow transition">X (Twitter)</a>
+      </div>
+
+      <div class="text-center md:text-right">
+        <p>© 2025 $CLAPCAT. Standing Ovations reserved.</p>
+      </div>
+    </div>
+
+    <div class="max-w-4xl mx-auto px-4 text-center mt-8 text-[11px] text-gray-600 leading-relaxed border-t border-white/5 pt-6">
+      DISCLAIMER: $CLAPCAT is a community-driven parody memecoin inspired by the viral clapping standing black cat meme. It is made strictly for entertainment, amusement, and applause purposes only with no expectation of financial profit. Do not trade with funds you can't afford to laugh off.
+    </div>
+  </footer>
+
+  <!-- JAVASCRIPT LOGIC & AUDIO SYNTHESIS -->
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    // State Variables
+    let soundEnabled = true;
+    let sessionClapsCount = 0;
+    let globalCommunityClaps = 1337420;
+    let hypeValue = 84;
+    const catImg = document.getElementById('catMemeImage');
+    const sessionClapsEl = document.getElementById('sessionClaps');
+    const heroTotalClapsEl = document.getElementById('heroTotalClaps');
+
+    // Web Audio Synthesizer for high-energy meme clap noises
+    let audioCtx = null;
+    function getAudioContext() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      return audioCtx;
+    }
+
+    // Play procedural clap sound
+    function playClapAudio(type = 'normal') {
+      if (!soundEnabled) return;
+      try {
+        const ctx = getAudioContext();
+        const now = ctx.currentTime;
+
+        // White noise burst for the clap snap
+        const bufferSize = ctx.sampleRate * 0.08;
+        const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+        const output = buffer.getChannelData(0);
+        for (let i = 0; i < bufferSize; i++) {
+          output[i] = (Math.random() * 2 - 1) * Math.exp(-i / (ctx.sampleRate * 0.015));
+        }
+
+        const whiteNoise = ctx.createBufferSource();
+        whiteNoise.buffer = buffer;
+
+        // Filter for organic "paw clap" resonance
+        const filter = ctx.createBiquadFilter();
+        filter.type = 'bandpass';
+        filter.frequency.setValueAtTime(type === 'airhorn' ? 1800 : 1200, now);
+        filter.Q.setValueAtTime(2.5, now);
+
+        const gainNode = ctx.createGain();
+        gainNode.gain.setValueAtTime(0.7, now);
+        gainNode.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
+
+        whiteNoise.connect(filter);
+        filter.connect(gainNode);
+        gainNode.connect(ctx.destination);
+        whiteNoise.start(now);
+
+        // Low thud tone for the cat's belly / thump
+        const osc = ctx.createOscillator();
+        const oscGain = ctx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(type === 'ovation' ? 220 : 140, now);
+        osc.frequency.exponentialRampToValueAtTime(40, now + 0.09);
+
+        oscGain.gain.setValueAtTime(0.4, now);
+        oscGain.gain.exponentialRampToValueAtTime(0.001, now + 0.09);
+
+        osc.connect(oscGain);
+        oscGain.connect(ctx.destination);
+        osc.start(now);
+        osc.stop(now + 0.1);
+      } catch (err) {
+        // audio might be restricted before user interaction
+      }
+    }
+
+    // Sound Toggle
+    function toggleMute() {
+      soundEnabled = !soundEnabled;
+      const icon = document.getElementById('soundIcon');
+      const text = document.getElementById('soundStatusText');
+      if (soundEnabled) {
+        icon.setAttribute('data-lucide', 'volume-2');
+        text.innerText = 'SFX ON';
+      } else {
+        icon.setAttribute('data-lucide', 'volume-x');
+        text.innerText = 'MUTED';
+      }
+      lucide.createIcons();
+    }
+
+    // Trigger Clap Animation and Counters
+    function triggerClap(event, multiplier = 1) {
+      sessionClapsCount += multiplier;
+      globalCommunityClaps += multiplier;
+
+      // Update counters
+      sessionClapsEl.innerText = sessionClapsCount.toLocaleString();
+      heroTotalClapsEl.innerText = globalCommunityClaps.toLocaleString();
+
+      // Trigger animation on cat
+      catImg.classList.add('clapping-active');
+      setTimeout(() => {
+        catImg.classList.remove('clapping-active');
+      }, 180);
+
+      // Play audio
+      playClapAudio();
+
+      // Spawn floating emojis
+      const emojis = ['👏', '😼', '🚀', '💎', '💰', '🔥', '✨'];
+      const chosenEmoji = emojis[Math.floor(Math.random() * emojis.length)];
+
+      const container = document.getElementById('catClickTarget');
+      const rect = container.getBoundingClientRect();
+      const emojiEl = document.createElement('div');
+      emojiEl.className = 'tap-emoji';
+      emojiEl.innerText = chosenEmoji;
+
+      let x = rect.width / 2;
+      let y = rect.height / 2;
+
+      if (event && event.clientX) {
+        x = event.clientX - rect.left;
+        y = event.clientY - rect.top;
+      }
+
+      // Add small randomness to position
+      x += (Math.random() * 40 - 20);
+      y += (Math.random() * 40 - 20);
+
+      emojiEl.style.left = `${x}px`;
+      emojiEl.style.top = `${y}px`;
+
+      container.appendChild(emojiEl);
+      setTimeout(() => emojiEl.remove(), 1000);
+
+      // Hype bar progression
+      hypeValue = Math.min(100, hypeValue + 0.3);
+      document.getElementById('hypeBar').style.width = `${hypeValue}%`;
+      if (hypeValue >= 99) {
+        document.getElementById('hypePercent').innerText = '🔥 MAXIMUM APPLAUSE REACHED! OVERCLAPPED! 🔥';
+      }
+    }
+
+    // Rapid Frenzy Clap button
+    function triggerFrenzyClap() {
+      let count = 0;
+      const interval = setInterval(() => {
+        triggerClap(null, 5);
+        count++;
+        if (count >= 10) {
+          clearInterval(interval);
+          // Launch confetti!
+          confetti({
+            particleCount: 50,
+            spread: 70,
+            origin: { y: 0.6 }
+          });
+        }
+      }, 70);
+    }
+
+    // Soundboard actions
+    function playSFX(type) {
+      if (type === 'polite') {
+        triggerClap(null, 1);
+      } else if (type === 'ovation') {
+        triggerClap(null, 10);
+        confetti({ particleCount: 30, spread: 50, origin: { y: 0.7 } });
+      } else if (type === 'moon') {
+        triggerClap(null, 50);
+        confetti({ particleCount: 70, spread: 80, origin: { y: 0.7 } });
+      } else if (type === 'airhorn') {
+        playClapAudio('airhorn');
+        triggerClap(null, 100);
+        confetti({
+          particleCount: 100,
+          spread: 100,
+          origin: { y: 0.6 }
+        });
+      }
+    }
+
+    // Keyboard Spacebar listener to clap
+    window.addEventListener('keydown', (e) => {
+      if (e.code === 'Space' && e.target.tagName !== 'INPUT') {
+        e.preventDefault();
+        triggerClap(null, 1);
+      }
+    });
+
+    // Copy Contract Address
+    function copyCA() {
+      const text = document.getElementById('caText').innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        const btnText = document.getElementById('copyBtnText');
+        const original = btnText.innerText;
+        btnText.innerText = 'COPIED! 👏';
+        setTimeout(() => {
+          btnText.innerText = original;
+        }, 2000);
+      });
+    }
+
+    // Swap Calculator Logic
+    function updateSwapCalc() {
+      const sol = parseFloat(document.getElementById('solInput').value) || 0;
+      const rate = 42000;
+      const output = Math.round(sol * rate);
+      document.getElementById('clapOutput').value = output.toLocaleString();
+    }
+
+    function handleSimulatedSwap() {
+      confetti({
+        particleCount: 80,
+        spread: 90,
+        origin: { y: 0.7 }
+      });
+      alert('🚀 Forwarding to Raydium pool! Prepare your diamond paws to hold $CLAPCAT!');
+      window.open('https://raydium.io', '_blank');
+    }
+
+    // FAQ Accordion
+    function toggleFaq(id) {
+      const content = document.getElementById(`faq-content-${id}`);
+      const icon = document.getElementById(`faq-icon-${id}`);
+      if (content.classList.contains('hidden')) {
+        content.classList.remove('hidden');
+        icon.classList.add('
